@@ -1,6 +1,6 @@
 # 🎮 เกม OX (Tic-Tac-Toe) ด้วย BFS Game Tree Algorithm
 
-เกม OX (Tic-Tac-Toe) บนตารางขนาด 3x3 พัฒนาด้วยภาษา **Python** พร้อมส่วนติดต่อผู้ใช้แบบกราฟิก (**GUI**) ที่ขับเคลื่อนด้วย **Breadth-First Search (BFS) Game Tree Algorithm** เต็มรูปแบบ
+เกม OX (Tic-Tac-Toe) บนตารางขนาด 3x3 พัฒนาด้วยภาษา **Python** ที่ขับเคลื่อนด้วย **Breadth-First Search (BFS) Game Tree Algorithm** [Still Develope]
 
 ---
 
