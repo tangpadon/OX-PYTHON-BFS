@@ -11,7 +11,7 @@
   <img src="https://img.shields.io/badge/Tests-10%2F10%20Passed-22C55E?style=flat-square" alt="Tests Passed" />
 </p>
 
-เกม OX (Tic-Tac-Toe) บนตารางขนาด 3x3 พัฒนาด้วยภาษา **Python** พร้อมส่วนติดต่อผู้ใช้แบบกราฟิก (**GUI**) ที่ขับเคลื่อนด้วย **Breadth-First Search (BFS) Game Tree Algorithm** เต็มรูปแบบ
+เกม OX (Tic-Tac-Toe) บนตารางขนาด 3x3 พัฒนาด้วยภาษา **Python** ที่ขับเคลื่อนด้วย **Breadth-First Search (BFS) Game Tree Algorithm** [Still Develope]
 
 ---
 
