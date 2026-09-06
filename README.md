@@ -1,10 +1,21 @@
-# 🎮 เกม OX (Tic-Tac-Toe) ด้วย BFS Game Tree Algorithm
+<p align="center">
+  <img src="assets/gamepad.svg" width="48" height="48" alt="OX Game Logo" />
+</p>
+
+<h1 align="center">เกม OX (Tic-Tac-Toe) ด้วย BFS Game Tree Algorithm</h1>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.8+-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/GUI-Tkinter-2563EB?style=flat-square" alt="GUI Tkinter" />
+  <img src="https://img.shields.io/badge/Algorithm-BFS%20Tree-0EA5E9?style=flat-square" alt="BFS Tree" />
+  <img src="https://img.shields.io/badge/Tests-10%2F10%20Passed-22C55E?style=flat-square" alt="Tests Passed" />
+</p>
 
 เกม OX (Tic-Tac-Toe) บนตารางขนาด 3x3 พัฒนาด้วยภาษา **Python** พร้อมส่วนติดต่อผู้ใช้แบบกราฟิก (**GUI**) ที่ขับเคลื่อนด้วย **Breadth-First Search (BFS) Game Tree Algorithm** เต็มรูปแบบ
 
 ---
 
-## 🌟 คุณสมบัติเด่น (Features)
+## <img src="assets/star.svg" width="20" height="20" valign="middle" /> คุณสมบัติเด่น (Features)
 
 1. **BFS Game Tree เต็มรูปแบบจาก State ว่างเปล่า**:
    - เริ่มต้นแตกกิ่งทั้งหมดตั้งแต่ Root ที่เป็นตารางว่างเปล่า 3x3 (`' ' * 9`)
@@ -24,18 +35,28 @@
    - ไฮไลต์กิ่งที่ดีที่สุดที่ AI เลือกเดิน
 4. **ส่วนติดต่อผู้ใช้กราฟิก (Tkinter GUI)**:
    - ดีไซน์สวยงาม ทันสมัย ใช้งานง่าย
-   - โหมดการเล่น: 👤 ผู้เล่น (X) vs 🤖 บอท BFS (O)
+   - โหมดการเล่น: <img src="assets/user.svg" width="16" height="16" valign="middle" /> ผู้เล่น (X) vs <img src="assets/bot.svg" width="16" height="16" valign="middle" /> บอท BFS (O)
+   - ขยายตารางเล่นเกมกว้างประมาณ 40% ของหน้าต่าง พร้อมล็อคขนาดช่องตารางไม่ให้เลื่อนขยับ
    - ไฮไลต์เส้นที่ชนะ (Winning line)
    - ปุ่ม Copy Log และ Clear Log
 
 ---
 
-## 📂 โครงสร้างไฟล์ในโปรเจกต์
+## <img src="assets/folder.svg" width="20" height="20" valign="middle" /> โครงสร้างไฟล์ในโปรเจกต์
 
 ```
 d:/OX-BFS/
 │
-├── ox_bfs_engine.py    # แกนกลางอัลกอริทึม BFS Game Tree, คิว และการคำนวณคะแนนกิ่ง
+├── assets/             # SVG icons สำหรับแสดงผลบน GitHub
+│   ├── bot.svg
+│   ├── cpu.svg
+│   ├── folder.svg
+│   ├── gamepad.svg
+│   ├── rocket.svg
+│   ├── star.svg
+│   └── user.svg
+├── ox_bfs_engine.py    # Core Engine: โครงสร้าง BFS Game Tree, คิว และการคำนวณคะแนน
+├── ox_debug.py         # Debug Formatter: จัดรูปแบบข้อความ DEBUG และพรีวิวตาราง ASCII
 ├── gui.py              # หน้าต่างกราฟิก Tkinter และระบบจัดการ Event
 ├── main.py             # จุดเริ่มต้นรันโปรแกรม (รองรับทั้ง GUI และ CLI)
 ├── test_engine.py      # ชุดทดสอบ Unit Tests สำหรับ BFS Engine (7 การทดสอบ)
@@ -45,7 +66,7 @@ d:/OX-BFS/
 
 ---
 
-## 🚀 วิธีการติดตั้งและเปิดใช้งาน (How to Run)
+## <img src="assets/rocket.svg" width="20" height="20" valign="middle" /> วิธีการติดตั้งและเปิดใช้งาน (How to Run)
 
 โปรเจกต์นี้ใช้ไลบรารีมาตรฐานของ Python ทั้งหมด (`tkinter`, `collections`, `time`, `unittest`) ไม่จำเป็นต้องติดตั้งไลบรารีภายนอกเพิ่มเติม
 
@@ -68,13 +89,13 @@ python test_gui.py
 
 ---
 
-## 🧠 หลักการทำงานของอัลกอริทึม BFS Game Tree
+## <img src="assets/cpu.svg" width="20" height="20" valign="middle" /> หลักการทำงานของอัลกอริทึม BFS Game Tree
 
 ```mermaid
 graph TD
     Root["Root: ตารางว่างเปล่า (' ' * 9)"] --> L1_1["ช่อง (0,0) [Index 0]"]
     Root --> L1_2["ช่อง (0,1) [Index 1]"]
-    Root --> L1_5["ช่อง (1,1) [Index 4] ★"]
+    Root --> L1_5["ช่อง (1,1) [Index 4] (Best Move)"]
     Root --> L1_9["... ช่องอื่นๆ"]
     
     L1_5 --> L2_1["O เดินช่องว่างถัดไป..."]
