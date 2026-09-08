@@ -1,7 +1,4 @@
-# ==========================================
 # Debug Formatting Utilities
-# ==========================================
-
 def format_row(board, start_index):
     cells = []
     for i in range(start_index, start_index + 3):

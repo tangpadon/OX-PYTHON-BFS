@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-import time
 from ox_bfs_engine import OXBFSTree, WINNING_COMBOS
 
 def place_symbol(board, position, player):
@@ -42,10 +41,7 @@ class OXGameGUI:
         self.start_new_game()
 
     def _init_engine(self):
-        t0 = time.time()
-        print("[GUI] กำลังโหลดและสร้าง BFS Game Tree...")
         self.tree = OXBFSTree()
-        print(f"[GUI] โหลด BFS Engine สำเร็จ ใช้เวลา {time.time() - t0:.2f} วินาที")
 
     # ==========================================
     # Layout Components
@@ -217,15 +213,7 @@ class OXGameGUI:
         self.debug_text.tag_config("turn_header", foreground="#38BDF8", font=("Consolas", 9, "bold"))
         self.debug_text.tag_config("best_move", foreground="#4ADE80", font=("Consolas", 9, "bold"))
 
-        border_line = "=" * 70
-        welcome_msg = (
-            border_line + "\n"
-            " ระบบวิเคราะห์กิ่งเกม OX ด้วย Breadth-First Search (BFS)\n"
-            " โหมด: 👤 ผู้เล่น (X) vs 🤖 บอท BFS (O)\n"
-            " โครงสร้าง: เริ่มต้นจากตารางว่างเปล่า 3x3 (' '*9) แตกกิ่งทั้งหมด 549,946 โหนด\n"
-            + border_line + "\n\n"
-        )
-        self._append_debug_log(welcome_msg)
+
 
     # ==========================================
     # Game Events & Move Execution
@@ -317,10 +305,11 @@ class OXGameGUI:
         self._execute_move(idx)
 
     def _execute_move(self, move_idx):
-        debug_output = self.tree.get_debug_text(
-            self.board, self.current_player, self.turn_count, chosen_move=move_idx
-        )
-        self._append_debug_log(debug_output + "\n")
+        if self.current_player == 'O':
+            debug_output = self.tree.get_debug_text(
+                self.board, self.current_player, self.turn_count, chosen_move=move_idx
+            )
+            self._append_debug_log(debug_output + "\n")
 
         self.board = place_symbol(self.board, move_idx, self.current_player)
 
