@@ -2,12 +2,42 @@ from collections import deque
 import time
 from ox_debug import get_debug_text
 
-# Board Utilities
-WINNING_COMBOS = (
-    (0, 1, 2), (3, 4, 5), (6, 7, 8),
-    (0, 3, 6), (1, 4, 7), (2, 5, 8),
-    (0, 4, 8), (2, 4, 6)
-)
+# Board Settings
+BOARD_SIZE = 3
+TOTAL_CELLS = BOARD_SIZE * BOARD_SIZE
+
+def get_winning_combos(size):
+    combos = []
+    
+    # 1. แนวนอน
+    for r in range(size):
+        row = []
+        for c in range(size):
+            row.append(r * size + c)
+        combos.append(tuple(row))
+        
+    # 2. แนวตั้ง
+    for c in range(size):
+        col = []
+        for r in range(size):
+            col.append(r * size + c)
+        combos.append(tuple(col))
+        
+    # 3. แนวทแยงซ้ายไปขวา
+    diag1 = []
+    for i in range(size):
+        diag1.append(i * size + i)
+    combos.append(tuple(diag1))
+    
+    # 4. แนวทแยงขวาไปซ้าย
+    diag2 = []
+    for i in range(size):
+        diag2.append(i * size + (size - 1 - i))
+    combos.append(tuple(diag2))
+    
+    return tuple(combos)
+
+WINNING_COMBOS = get_winning_combos(BOARD_SIZE)
 
 def get_opponent(player):
     if player == 'X':
@@ -21,9 +51,16 @@ def place_symbol(board, position, player):
     return "".join(board_list)
 
 def check_board_winner(board):
-    for a, b, c in WINNING_COMBOS:
-        if board[a] != ' ' and board[a] == board[b] == board[c]:
-            return board[a]
+    for combo in WINNING_COMBOS:
+        first = combo[0]
+        if board[first] != ' ':
+            all_match = True
+            for pos in combo:
+                if board[pos] != board[first]:
+                    all_match = False
+                    break
+            if all_match:
+                return board[first]
     if ' ' not in board:
         return 'Draw'
     return None
@@ -58,7 +95,7 @@ class OXBFSTree:
 
     def _build_tree(self):
         t0 = time.time()
-        initial_board = ' ' * 9
+        initial_board = ' ' * TOTAL_CELLS
         self.root = GameNode(initial_board, 'X', depth=0)
         
         queue = deque([self.root])
@@ -71,7 +108,7 @@ class OXBFSTree:
                 continue
 
             next_player = get_opponent(node.player_turn)
-            for pos in range(9):
+            for pos in range(TOTAL_CELLS):
                 if node.board[pos] == ' ':
                     next_board = place_symbol(node.board, pos, node.player_turn)
                     child = GameNode(next_board, next_player, move=pos, depth=node.depth + 1)
@@ -82,6 +119,7 @@ class OXBFSTree:
 
         self.total_nodes = len(all_nodes)
 
+        # คำนวณผลสรุปและค่า Minimax ย้อนกลับจากล่างขึ้นบน (Bottom-Up)
         for node in reversed(all_nodes):
             if node.is_terminal:
                 self.total_leaves = self.total_leaves + 1
@@ -134,63 +172,62 @@ class OXBFSTree:
         else:
             is_swapped = False
 
-        branches = []
-        if node is not None:
-            for child in node.children:
-                move = child.move
-                row = move // 3
-                col = move % 3
+        if node is None or len(node.children) == 0:
+            return [], None
 
-                if is_swapped:
+        branches = []
+        for child in node.children:
+            move = child.move
+            row = move // BOARD_SIZE
+            col = move % BOARD_SIZE
+
+            if is_swapped:
+                wins = child.wins_x
+                losses = child.wins_o
+                minimax_val = child.minimax_val
+                if child.winner == 'X':
+                    direct_result = 'O'
+                elif child.winner == 'O':
+                    direct_result = 'X'
+                else:
+                    direct_result = child.winner
+            else:
+                if current_player == 'X':
                     wins = child.wins_x
                     losses = child.wins_o
                     minimax_val = child.minimax_val
-                    if child.winner == 'X':
-                        direct_result = 'O'
-                    elif child.winner == 'O':
-                        direct_result = 'X'
-                    else:
-                        direct_result = child.winner
                 else:
-                    if current_player == 'X':
-                        wins = child.wins_x
-                        losses = child.wins_o
-                        minimax_val = child.minimax_val
-                    else:
-                        wins = child.wins_o
-                        losses = child.wins_x
-                        minimax_val = -child.minimax_val
-                    direct_result = child.winner
+                    wins = child.wins_o
+                    losses = child.wins_x
+                    minimax_val = -child.minimax_val
+                direct_result = child.winner
 
-                draws = child.draws
-                total = wins + losses + draws
-                score = (wins * 1) + (losses * -1)
+            draws = child.draws
+            total = wins + losses + draws
+            score = (wins * 1) + (losses * -1)
 
-                if total > 0:
-                    win_rate = (wins / total) * 100.0
-                else:
-                    win_rate = 0.0
+            if total > 0:
+                win_rate = (wins / total) * 100.0
+            else:
+                win_rate = 0.0
 
-                next_board = place_symbol(current_board, move, current_player)
+            next_board = place_symbol(current_board, move, current_player)
 
-                branch = {
-                    'move': move,
-                    'row': row,
-                    'col': col,
-                    'next_board': next_board,
-                    'wins': wins,
-                    'losses': losses,
-                    'draws': draws,
-                    'total_branches': total,
-                    'score': score,
-                    'win_rate': win_rate,
-                    'minimax_val': minimax_val,
-                    'direct_result': direct_result
-                }
-                branches.append(branch)
-
-        if len(branches) == 0:
-            return [], None
+            branch = {
+                'move': move,
+                'row': row,
+                'col': col,
+                'next_board': next_board,
+                'wins': wins,
+                'losses': losses,
+                'draws': draws,
+                'total_branches': total,
+                'score': score,
+                'win_rate': win_rate,
+                'minimax_val': minimax_val,
+                'direct_result': direct_result
+            }
+            branches.append(branch)
 
         # 1. ถ้าเดินแล้วชนะเลย ให้เดินช่องนั้นทันที
         for b in branches:

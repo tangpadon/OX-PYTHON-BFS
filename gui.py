@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-from ox_bfs_engine import OXBFSTree, WINNING_COMBOS
+from ox_bfs_engine import OXBFSTree, WINNING_COMBOS, BOARD_SIZE, TOTAL_CELLS
 
 def place_symbol(board, position, player):
     board_list = list(board)
@@ -27,7 +27,7 @@ class OXGameGUI:
         self.COLOR_BTN = "#FFFFFF"
         self.COLOR_BTN_HOVER = "#E3F2FD"
 
-        self.board = ' ' * 9
+        self.board = ' ' * TOTAL_CELLS
         self.current_player = 'X'
         self.turn_count = 1
         self.game_over = False
@@ -122,18 +122,23 @@ class OXGameGUI:
         board_frame = tk.Frame(left_panel, bg="#CBD5E1", bd=2, relief=tk.SUNKEN)
         board_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
 
-        for r in range(3):
+        for r in range(BOARD_SIZE):
             board_frame.rowconfigure(r, weight=1, uniform="cell")
             board_frame.columnconfigure(r, weight=1, uniform="cell")
 
+        if BOARD_SIZE <= 3:
+            btn_font_size = 32
+        else:
+            btn_font_size = 20
+
         self.buttons = []
-        for i in range(9):
-            row = i // 3
-            col = i % 3
+        for i in range(TOTAL_CELLS):
+            row = i // BOARD_SIZE
+            col = i % BOARD_SIZE
             btn = tk.Button(
                 board_frame,
                 text=" ",
-                font=("Segoe UI", 32, "bold"),
+                font=("Segoe UI", btn_font_size, "bold"),
                 bg=self.COLOR_BTN,
                 activebackground=self.COLOR_BTN_HOVER,
                 relief=tk.FLAT,
@@ -239,7 +244,7 @@ class OXGameGUI:
             self.ai_job = None
 
         self._clear_debug_log()
-        self.board = ' ' * 9
+        self.board = ' ' * TOTAL_CELLS
         self.current_player = 'X'
         self.turn_count = 1
         self.game_over = False
@@ -268,22 +273,28 @@ class OXGameGUI:
 
     def _check_game_end(self):
         for combo in WINNING_COMBOS:
-            a, b, c = combo
-            if self.board[a] != ' ' and self.board[a] == self.board[b] == self.board[c]:
-                winner = self.board[a]
-                self.game_over = True
-                self.scores[winner] = self.scores[winner] + 1
-                self._update_scoreboard()
-                self._highlight_winning_line(combo)
+            first = combo[0]
+            if self.board[first] != ' ':
+                all_match = True
+                for pos in combo:
+                    if self.board[pos] != self.board[first]:
+                        all_match = False
+                        break
+                if all_match:
+                    winner = self.board[first]
+                    self.game_over = True
+                    self.scores[winner] = self.scores[winner] + 1
+                    self._update_scoreboard()
+                    self._highlight_winning_line(combo)
 
-                if winner == 'X':
-                    who = "👤 คุณ (X)"
-                else:
-                    who = "🤖 บอท BFS (O)"
+                    if winner == 'X':
+                        who = "👤 คุณ (X)"
+                    else:
+                        who = "🤖 บอท BFS (O)"
 
-                self._update_status(f"🎉 {who} เป็นฝ่ายชนะ!", is_over=True)
-                self._append_debug_log(f"\n[ผลการแข่งขัน] {who} ชนะเกมในเทิร์นที่ {self.turn_count}!\n\n")
-                return True
+                    self._update_status(f"🎉 {who} เป็นฝ่ายชนะ!", is_over=True)
+                    self._append_debug_log(f"\n[ผลการแข่งขัน] {who} ชนะเกมในเทิร์นที่ {self.turn_count}!\n\n")
+                    return True
 
         if ' ' not in self.board:
             self.game_over = True

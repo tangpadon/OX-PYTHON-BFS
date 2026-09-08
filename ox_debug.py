@@ -1,13 +1,13 @@
 # Debug Formatting Utilities
-def format_row(board, start_index):
+def format_row(board, start_index, size):
     cells = []
-    for i in range(start_index, start_index + 3):
+    for i in range(start_index, start_index + size):
         char = board[i]
         if char == ' ':
             cells.append('.')
         else:
             cells.append(char)
-    return cells[0] + " | " + cells[1] + " | " + cells[2]
+    return " | ".join(cells)
 
 def get_branch_score(branch):
     return branch['score']
@@ -17,6 +17,8 @@ def get_debug_text(tree, current_board, current_player, turn_number, chosen_move
     if len(branches) == 0:
         return f"--- Turn {turn_number} ({current_player}): ไม่พบกิ่งต่อไป ---"
 
+    size = int(len(current_board) ** 0.5)
+
     border_line = "=" * 70
     dash_line = "-" * 70
 
@@ -24,8 +26,8 @@ def get_debug_text(tree, current_board, current_player, turn_number, chosen_move
     lines.append(border_line)
     lines.append(f" [DEBUG] TURN {turn_number} - ผู้เล่น: {current_player} | สถานะตารางปัจจุบัน:")
 
-    for start_idx in (0, 3, 6):
-        row_str = format_row(current_board, start_idx)
+    for r in range(size):
+        row_str = format_row(current_board, r * size, size)
         lines.append(f"       {row_str}")
 
     lines.append(dash_line)
@@ -61,13 +63,12 @@ def get_debug_text(tree, current_board, current_player, turn_number, chosen_move
 
         lines.append(f"    └─ ผลวิเคราะห์เกม (Minimax): {eval_desc} (ค่า: {b['minimax_val']:+d})")
 
-        r0 = format_row(b['next_board'], 0)
-        r1 = format_row(b['next_board'], 3)
-        r2 = format_row(b['next_board'], 6)
-
-        lines.append(f"       Preview: [{r0}]")
-        lines.append(f"                [{r1}]")
-        lines.append(f"                [{r2}]")
+        for r in range(size):
+            row_str = format_row(b['next_board'], r * size, size)
+            if r == 0:
+                lines.append(f"       Preview: [{row_str}]")
+            else:
+                lines.append(f"                [{row_str}]")
         lines.append("")
 
     if chosen_move is not None:
@@ -75,8 +76,8 @@ def get_debug_text(tree, current_board, current_player, turn_number, chosen_move
     else:
         pick_move = auto_best
 
-    r_sel = pick_move // 3
-    c_sel = pick_move % 3
+    r_sel = pick_move // size
+    c_sel = pick_move % size
     lines.append(f" [สรุปการตัดสินใจ] AI เลือกเดินกิ่งช่อง ({r_sel}, {c_sel}) Index {pick_move}")
     lines.append(border_line)
     return "\n".join(lines)
