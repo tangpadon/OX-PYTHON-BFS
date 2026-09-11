@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMyNTYzRUIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPGxpbmUgeDE9IjYiIHgyPSIxMCIgeTE9IjEyIiB5Mj0iMTIiLz4gPGxpbmUgeDE9IjgiIHgyPSI4IiB5MT0iMTAiIHkyPSIxNCIvPiA8bGluZSB4MT0iMTUiIHgyPSIxNS4wMSIgeTE9IjEzIiB5Mj0iMTMiLz4gPGxpbmUgeDE9IjE4IiB4Mj0iMTguMDEiIHkxPSIxMSIgeTI9IjExIi8+IDxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIxMiIgeD0iMiIgeT0iNiIgcng9IjYiLz4gPC9zdmc+" width="48" height="48" alt="OX Game Logo" />
-</p>
-
 <h1 align="center">ระบบเกม OX (Tic-Tac-Toe) ด้วยขั้นตอนวิธี Breadth-First Search (BFS) Game Tree</h1>
 
 <p align="center">
@@ -14,7 +10,7 @@
 
 ---
 
-## <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNFQUIzMDgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHBvbHlnb24gcG9pbnRzPSIxMiAyIDE1LjA5IDguMjYgMjIgOS4yNyAxNyAxNC4xNCAxOC4xOCAyMS4wMiAxMiAxNy43NyA1LjgyIDIxLjAyIDcgMTQuMTQgMiA5LjI3IDguOTEgOC4yNiAxMiAyIi8+IDwvc3ZnPg==" width="20" height="20" valign="middle" /> คุณลักษณะสำคัญของระบบ (System Features)
+## คุณลักษณะสำคัญของระบบ (System Features)
 
 1. **การสำรวจปริภูมิสถานะอย่างครบถ้วน (Exhaustive State Space Exploration via BFS)**:
    - ประมวลผลและสร้างต้นไม้สถานะของเกม (Game Tree) จากสถานะเริ่มต้นที่เป็นกระดานว่างเปล่า (`' ' * 9`)
@@ -35,13 +31,13 @@
    - ไฮไลต์ระบุตาเดินที่เหมาะสมที่สุด (Optimal Move) ตามเกณฑ์ Minimax
 4. **ส่วนติดต่อผู้ใช้เชิงกราฟิก (Graphical User Interface - Tkinter GUI)**:
    - โครงสร้างการแสดงผลแบบโมเดิร์น สัดส่วนการใช้งานมีความชัดเจนและเป็นระเบียบ
-   - โหมดการแข่งขัน: <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMxNTY1QzAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHBhdGggZD0iTTE5IDIxdi0yYTQgNCAwIDAgMC00LTRIOWE0IDQgMCAwIDAtNCA0djIiLz4gPGNpcmNsZSBjeD0iMTIiIGN5PSI3IiByPSI0Ii8+IDwvc3ZnPg==" width="16" height="16" valign="middle" /> ผู้เล่น (Player X) ดำเนินการแข่งขันกับ <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNEODQzMTUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHJlY3Qgd2lkdGg9IjE4IiBoZWlnaHQ9IjEyIiB4PSIzIiB5PSI2IiByeD0iMiIvPiA8cGF0aCBkPSJNOSAxMXYyIi8+IDxwYXRoIGQ9Ik0xNSAxMXYyIi8+IDxwYXRoIGQ9Ik05IDJoNiIvPiA8cGF0aCBkPSJNMTIgMnY0Ii8+IDxwYXRoIGQ9Ik0yIDEyaDEiLz4gPHBhdGggZD0iTTIxIDEyaDEiLz4gPC9zdmc+" width="16" height="16" valign="middle" /> ปัญญาประดิษฐ์ (BFS Bot O)
+   - โหมดการแข่งขัน: ผู้เล่น (Player X) ดำเนินการแข่งขันกับ ปัญญาประดิษฐ์ (BFS Bot O)
    - จัดสรรสัดส่วนหน้าต่างระหว่างกระดานเกมและแผงรายงานผลอย่างเป็นสัดส่วน (40:60) พร้อมกำหนดขนาดช่องตารางแบบคงที่ (Fixed Grid Cell Constraints)
    - แสดงผลไฮไลต์เส้นที่ชนะ (Winning Combination Line) เมื่อสิ้นสุดการแข่งขัน
 
 ---
 
-## <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMjg0QzciIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHBhdGggZD0iTTIwIDIwYTIgMiAwIDAgMCAyLTJWOGEyIDIgMCAwIDAtMi0yaC03LjlhMiAyIDAgMCAxLTEuNjktLjlMOS42IDMuOUEyIDIgMCAwIDAgNy45MyAzSDRhMiAyIDAgMCAwLTIgMnYxM2EyIDIgMCAwIDAgMiAyWiIvPiA8L3N2Zz4=" width="20" height="20" valign="middle" /> โครงสร้างไฟล์ในโครงการ (Project Architecture)
+## โครงสร้างไฟล์ในโครงการ (Project Architecture)
 
 ```
 drive:/OX-BFS/
@@ -56,7 +52,7 @@ drive:/OX-BFS/
 
 ---
 
-## <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNFQTU4MEMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHBhdGggZD0iTTQuNSAxNi41Yy0xLjUgMS4yNi0yIDUtMiA1czMuNzQtLjUgNS0yYy43MS0uODQuNy0yLjEzLS4wOS0yLjkxYTIuMTggMi4xOCAwIDAgMC0yLjkxLS4wOXoiLz4gPHBhdGggZD0ibTEyIDE1LTMtM2EyMiAyMiAwIDAgMSAyLTMuOTVBMTIuODggMTIuODggMCAwIDEgMjIgMmMwIDIuNzItLjc4IDcuNS02IDExYTIyLjM1IDIyLjM1IDAgMCAxLTQgMnoiLz4gPHBhdGggZD0iTTkgMTJINHMuNTUtMy4wMyAyLTRjMS42Mi0xLjA4IDUgMCA1IDAiLz4gPHBhdGggZD0iTTEyIDE1djVzMy4wMy0uNTUgNC0yYzEuMDgtMS42MiAwLTUgMC01Ii8+IDwvc3ZnPg==" width="20" height="20" valign="middle" /> ข้อกำหนดระบบและการเริ่มต้นใช้งาน (System Requirements & Execution)
+## ข้อกำหนดระบบและการเริ่มต้นใช้งาน (System Requirements & Execution)
 
 โครงการนี้พัฒนาขึ้นโดยใช้ไลบรารีมาตรฐานของภาษา Python ทั้งหมด (`tkinter`, `collections`) โดยไม่มีการพึ่งพาไลบรารีภายนอก (Zero External Dependencies)
 
@@ -69,7 +65,7 @@ python main.py
 
 ---
 
-## <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM4QjVDRjYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiB4PSI0IiB5PSI0IiByeD0iMiIvPiA8cmVjdCB3aWR0aD0iNiIgaGVpZ2h0PSI2IiB4PSI5IiB5PSI5IiByeD0iMSIvPiA8cGF0aCBkPSJNMTUgMnYyIi8+IDxwYXRoIGQ9Ik0xNSAyMHYyIi8+IDxwYXRoIGQ9Ik0yIDE1aDIiLz4gPHBhdGggZD0iTTIgOWgyIi8+IDxwYXRoIGQ9Ik0yMCAxNWgyIi8+IDxwYXRoIGQ9Ik0yMCA5aDIiLz4gPHBhdGggZD0iTTkgMnYyIi8+IDxwYXRoIGQ9Ik05IDIwdjIiLz4gPC9zdmc+" width="20" height="20" valign="middle" /> สถาปัตยกรรมขั้นตอนวิธี (Algorithmic Architecture)
+## สถาปัตยกรรมขั้นตอนวิธี (Algorithmic Architecture)
 
 ```mermaid
 graph TD
@@ -111,7 +107,7 @@ graph TD
 
 ---
 
-## <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwNTk2NjkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHBvbHlsaW5lIHBvaW50cz0iMTYgMTggMjIgMTIgMTYgNiIvPiA8cG9seWxpbmUgcG9pbnRzPSI4IDYgMiAxMiA4IDE4Ii8+IDwvc3ZnPg==" width="20" height="20" valign="middle" /> เอกสารอ้างอิงฟังก์ชันและโครงสร้างข้อมูล (Function & Class Reference)
+## เอกสารอ้างอิงฟังก์ชันและโครงสร้างข้อมูล (Function & Class Reference)
 
 ### 1. มอดูล `core_bfs.py` (แกนประมวลผลหลัก BFS Game Tree)
 
