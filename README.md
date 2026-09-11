@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/gamepad.svg" width="48" height="48" alt="OX Game Logo" />
+  <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMyNTYzRUIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPGxpbmUgeDE9IjYiIHgyPSIxMCIgeTE9IjEyIiB5Mj0iMTIiLz4gPGxpbmUgeDE9IjgiIHgyPSI4IiB5MT0iMTAiIHkyPSIxNCIvPiA8bGluZSB4MT0iMTUiIHgyPSIxNS4wMSIgeTE9IjEzIiB5Mj0iMTMiLz4gPGxpbmUgeDE9IjE4IiB4Mj0iMTguMDEiIHkxPSIxMSIgeTI9IjExIi8+IDxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIxMiIgeD0iMiIgeT0iNiIgcng9IjYiLz4gPC9zdmc+" width="48" height="48" alt="OX Game Logo" />
 </p>
 
 <h1 align="center">เกม OX (Tic-Tac-Toe) ด้วย BFS Game Tree Algorithm</h1>
@@ -14,7 +14,7 @@
 
 ---
 
-## <img src="assets/star.svg" width="20" height="20" valign="middle" /> คุณสมบัติเด่น (Features)
+## <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNFQUIzMDgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHBvbHlnb24gcG9pbnRzPSIxMiAyIDE1LjA5IDguMjYgMjIgOS4yNyAxNyAxNC4xNCAxOC4xOCAyMS4wMiAxMiAxNy43NyA1LjgyIDIxLjAyIDcgMTQuMTQgMiA5LjI3IDguOTEgOC4yNiAxMiAyIi8+IDwvc3ZnPg==" width="20" height="20" valign="middle" /> คุณสมบัติเด่น (Features)
 
 1. **BFS Game Tree เต็มรูปแบบจาก State ว่างเปล่า**:
    - เริ่มต้นแตกกิ่งทั้งหมดตั้งแต่ Root ที่เป็นตารางว่างเปล่า 3x3 (`' ' * 9`)
@@ -34,28 +34,18 @@
    - ไฮไลต์กิ่งที่ดีที่สุดที่ AI เลือกเดิน
 4. **ส่วนติดต่อผู้ใช้กราฟิก (Tkinter GUI)**:
    - ดีไซน์สวยงาม ทันสมัย ใช้งานง่าย
-   - โหมดการเล่น: <img src="assets/user.svg" width="16" height="16" valign="middle" /> ผู้เล่น (X) vs <img src="assets/bot.svg" width="16" height="16" valign="middle" /> บอท BFS (O)
+   - โหมดการเล่น: <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMxNTY1QzAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHBhdGggZD0iTTE5IDIxdi0yYTQgNCAwIDAgMC00LTRIOWE0IDQgMCAwIDAtNCA0djIiLz4gPGNpcmNsZSBjeD0iMTIiIGN5PSI3IiByPSI0Ii8+IDwvc3ZnPg==" width="16" height="16" valign="middle" /> ผู้เล่น (X) vs <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNEODQzMTUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHJlY3Qgd2lkdGg9IjE4IiBoZWlnaHQ9IjEyIiB4PSIzIiB5PSI2IiByeD0iMiIvPiA8cGF0aCBkPSJNOSAxMXYyIi8+IDxwYXRoIGQ9Ik0xNSAxMXYyIi8+IDxwYXRoIGQ9Ik05IDJoNiIvPiA8cGF0aCBkPSJNMTIgMnY0Ii8+IDxwYXRoIGQ9Ik0yIDEyaDEiLz4gPHBhdGggZD0iTTIxIDEyaDEiLz4gPC9zdmc+" width="16" height="16" valign="middle" /> บอท BFS (O)
    - ขยายตารางเล่นเกมกว้างประมาณ 40% ของหน้าต่าง พร้อมล็อคขนาดช่องตารางไม่ให้เลื่อนขยับ
    - ไฮไลต์เส้นที่ชนะ (Winning line)
-   - ปุ่ม Copy Log และ Clear Log
 
 ---
 
-## <img src="assets/folder.svg" width="20" height="20" valign="middle" /> โครงสร้างไฟล์ในโปรเจกต์
+## <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMjg0QzciIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHBhdGggZD0iTTIwIDIwYTIgMiAwIDAgMCAyLTJWOGEyIDIgMCAwIDAtMi0yaC03LjlhMiAyIDAgMCAxLTEuNjktLjlMOS42IDMuOUEyIDIgMCAwIDAgNy45MyAzSDRhMiAyIDAgMCAwLTIgMnYxM2EyIDIgMCAwIDAgMiAyWiIvPiA8L3N2Zz4=" width="20" height="20" valign="middle" /> โครงสร้างไฟล์ในโปรเจกต์
 
 ```
 d:/OX-BFS/
 │
-├── assets/             # SVG icons สำหรับแสดงผลบน GitHub
-│   ├── bot.svg
-│   ├── code.svg
-│   ├── cpu.svg
-│   ├── folder.svg
-│   ├── gamepad.svg
-│   ├── rocket.svg
-│   ├── star.svg
-│   └── user.svg
-├── ox_bfs_engine.py    # Core Engine: โครงสร้าง BFS Game Tree, คิว และการคำนวณคะแนน
+├── core_bfs.py         # Logic หลัก: โครงสร้าง BFS Game Tree, คิว และการคำนวณคะแนน
 ├── ox_debug.py         # Debug Formatter: จัดรูปแบบข้อความ DEBUG และพรีวิวตาราง ASCII
 ├── gui.py              # หน้าต่างกราฟิก Tkinter และระบบจัดการ Event
 ├── main.py             # จุดเริ่มต้นรันโปรแกรม
@@ -64,7 +54,7 @@ d:/OX-BFS/
 
 ---
 
-## <img src="assets/rocket.svg" width="20" height="20" valign="middle" /> วิธีการติดตั้งและเปิดใช้งาน (How to Run)
+## <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNFQTU4MEMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHBhdGggZD0iTTQuNSAxNi41Yy0xLjUgMS4yNi0yIDUtMiA1czMuNzQtLjUgNS0yYy43MS0uODQuNy0yLjEzLS4wOS0yLjkxYTIuMTggMi4xOCAwIDAgMC0yLjkxLS4wOXoiLz4gPHBhdGggZD0ibTEyIDE1LTMtM2EyMiAyMiAwIDAgMSAyLTMuOTVBMTIuODggMTIuODggMCAwIDEgMjIgMmMwIDIuNzItLjc4IDcuNS02IDExYTIyLjM1IDIyLjM1IDAgMCAxLTQgMnoiLz4gPHBhdGggZD0iTTkgMTJINHMuNTUtMy4wMyAyLTRjMS42Mi0xLjA4IDUgMCA1IDAiLz4gPHBhdGggZD0iTTEyIDE1djVzMy4wMy0uNTUgNC0yYzEuMDgtMS42MiAwLTUgMC01Ii8+IDwvc3ZnPg==" width="20" height="20" valign="middle" /> วิธีการติดตั้งและเปิดใช้งาน (How to Run)
 
 โปรเจกต์นี้ใช้ไลบรารีมาตรฐานของ Python ทั้งหมด (`tkinter`, `collections`) ไม่จำเป็นต้องติดตั้งไลบรารีภายนอกเพิ่มเติม
 
@@ -74,7 +64,7 @@ python main.py
 
 ---
 
-## <img src="assets/cpu.svg" width="20" height="20" valign="middle" /> หลักการทำงานของอัลกอริทึม BFS Game Tree
+## <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM4QjVDRjYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiB4PSI0IiB5PSI0IiByeD0iMiIvPiA8cmVjdCB3aWR0aD0iNiIgaGVpZ2h0PSI2IiB4PSI5IiB5PSI5IiByeD0iMSIvPiA8cGF0aCBkPSJNMTUgMnYyIi8+IDxwYXRoIGQ9Ik0xNSAyMHYyIi8+IDxwYXRoIGQ9Ik0yIDE1aDIiLz4gPHBhdGggZD0iTTIgOWgyIi8+IDxwYXRoIGQ9Ik0yMCAxNWgyIi8+IDxwYXRoIGQ9Ik0yMCA5aDIiLz4gPHBhdGggZD0iTTkgMnYyIi8+IDxwYXRoIGQ9Ik05IDIwdjIiLz4gPC9zdmc+" width="20" height="20" valign="middle" /> หลักการทำงานของอัลกอริทึม BFS Game Tree
 
 ```mermaid
 graph TD
@@ -87,91 +77,99 @@ graph TD
     L2_1 --> L_terminal["Terminal States (ชนะ +1 / แพ้ -1 / เสมอ 0)"]
 ```
 
-1. **Breadth-First Expansion**:
-   นำโหนดใส่ `deque` และดึงออกมาทีละตัวเพื่อแตกกิ่งไปยังช่องที่ยังว่างอยู่ (`' '`) เมื่อพบสถานะสิ้นสุด (Terminal State) จะหยุดแตกกิ่งในสายนั้น
-2. **Bottom-Up Reverse BFS Score Propagation**:
-   เมื่อประมวลผล BFS เสร็จสิ้น จะย้อนลำดับจากโหนดปลายทางกลับขึ้นมาสู่ Root:
-   - นับผลรวมของกิ่งลูก: $\text{Wins}$, $\text{Losses}$, $\text{Draws}$
-   - คำนวณค่า Minimax เพื่อการันตีการเล่นที่ไม่เพลี่ยงพล้ำ
-3. **การเลือกตาเดินของ AI (Decision Strategy)**:
-   - **Direct Win**: หากมีตาเดินที่ทำให้ชนะทันที จะเลือกเดินทันที
-   - **Direct Block**: หากคู่ต่อสู้มีโอกาสชนะในตาถัดไป จะต้องบล็อกทันที
-   - **Optimal Branch Selection**: เลือกกิ่งที่มี Minimax ดีที่สุด และมีคะแนนผลรวมกิ่ง (Branch Score) สูงที่สุด
+อัลกอริทึมทำงานเป็น **2 เฟส**:
+
+### เฟส 1 — สร้าง BFS Game Tree ครั้งเดียวตอนเปิดโปรแกรม (Precompute ~1 วินาที)
+
+1. **Breadth-First Expansion (ขยายทีละระดับด้วยคิวแบบ FIFO)**:
+   - เริ่มจาก Root = ตารางว่าง `' ' * 9` ใส่เข้า `collections.deque` (`append`)
+   - `popleft()` ดึงโหนดจาก **หัวคิว** → รับประกันการเรียงลําดับแบบ **Level-Order Traversal** คือขยาย depth `0 → 1 → 2 → ... → 9` ทีละระดับ
+   - แต่ละโหนดกระจายไปยังช่องว่างทุกช่อง (`' '`) สร้างโหนดลูกที่ depth+1 แล้ว `append` เข้าท้ายคิว
+   - เจอ Terminal State (ชนะ/เสมอ) → **ตัดกิ่ง (Prune)** ไม่ขยายต่อ และกลายเป็น Leaf
+   - ได้ครบทั้ง **549,946 โหนด** และ **255,168 ใบไม้** ในเวลาประมาณ 1 วินาที
+2. **`state_map` (Cache สถานะ)**:
+   - ระหว่าง BFS จดทุกโหนดลง Dict `state_map[(board, player_turn)] = node`
+   - เป็นทั้ง "Visited Set" และ "Lookup Table" → ตอนเล่นเกมหาสถานะปัจจุบันเจอใน **O(1)** โดยไม่ต้องคำนวณซ้ำ
+3. **Bottom-Up Reverse Score Propagation (สะสมผลย้อนกลับ)**:
+   - BFS เก็บ `all_nodes` ให้โหนดแม่มาก่อนลูกเสมอ → การวน `reversed(all_nodes)` จึงรับประกันว่าลูกถูกประมวลผลก่อนแม่
+   - ใบไม้ถูกตั้งค่าก่อน: X ชนะ `+1`, O ชนะ `-1`, เสมอ `0` จากนั้นสะสม `wins_x / wins_o / draws` ขึ้นสู่ต้นน้ำ
+   - แต่ละโหนดคำนวณ `minimax_val` = `max()` เมื่อถึงตา X / `min()` เมื่อถึงตา O
+
+### เฟส 2 — เลือกตาเดินจาก BFS Tree ที่คำนวณไว้แล้ว (Runtime)
+
+ไม่ต้องสร้าง tree ใหม่ เพียงค้นหาโหนดปัจจุบันใน `state_map` แล้วอ่านสถิติที่มีอยู่:
+
+- **Direct Win**: ถ้าเดินแล้วชนะทันที → เลือกเดินทันที
+- **Direct Block**: ถ้าคู่แข่งกำลังจะชนะในตาถัดไป → เดินบล็อกทันที
+- **Optimal Branch Selection**: เลือกกิ่งที่มี `minimax_val` สูงสุด และในกลุ่มเดียวกันเลือกคะแนนรวม (Branch Score) สูงสุด
 
 ---
 
-## <img src="assets/code.svg" width="20" height="20" valign="middle" /> คำอธิบายการทำงานของแต่ละฟังก์ชัน (Function Explanations)
+## <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwNTk2NjkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4gPHBvbHlsaW5lIHBvaW50cz0iMTYgMTggMjIgMTIgMTYgNiIvPiA8cG9seWxpbmUgcG9pbnRzPSI4IDYgMiAxMiA4IDE4Ii8+IDwvc3ZnPg==" width="20" height="20" valign="middle" /> คำอธิบายการทำงานของแต่ละฟังก์ชัน (Function Explanations)
 
-### 1. ไฟล์ `ox_bfs_engine.py` (แกนกลางระบบและ Breadth-First Search)
+### 1. ไฟล์ `core_bfs.py` (Logic หลัก BFS Game Tree)
 
-โมดูลหลักในการสร้างและค้นหาผ่าน BFS Game Tree ทั้งหมด 549,946 โหนด:
+โมดูลที่สร้างและค้นหา BFS Game Tree ทั้งหมด **549,946 โหนด**:
 
-- **การตั้งค่าขนาดกระดาน (Configuration)**:
-  - `BOARD_SIZE`: ตัวแปรกำหนดขนาดกระดาน (ค่าเริ่มต้นคือ `3` สำหรับตาราง 3x3 หรือเปลี่ยนเป็น `4` สำหรับตาราง 4x4)
-  - `TOTAL_CELLS`: จำนวนช่องทั้งหมดบนกระดาน คำนวณจาก `BOARD_SIZE * BOARD_SIZE`
-- **ฟังก์ชันระดับโมดูล**:
-  - `get_winning_combos(size)`: สร้างชุดเส้นคอมโบชนะ (แนวนอน, แนวตั้ง, แนวทแยง) อัตโนมัติตามขนาดกระดานด้วยลูป `for` พื้นฐาน
-  - `get_opponent(player)`: คืนค่าสัญลักษณ์ของคู่แข่ง (ถ้าส่ง `'X'` จะคืน `'O'`, ถ้าส่ง `'O'` จะคืน `'X'`)
-  - `place_symbol(board, position, player)`: วางสัญลักษณ์ของผู้เล่นลงในตำแหน่งที่ระบุ และคืนสตริงกระดานชุดใหม่
-  - `check_board_winner(board)`: ตรวจสอบสถานะแพ้/ชนะ/เสมอ จากชุดคอมโบเส้นชนะที่คำนวณไว้ใน `WINNING_COMBOS` โดยคืนค่าเป็น `'X'`, `'O'`, `'Draw'` (กรณีเต็มกระดานและไม่มีผู้ชนะ), หรือ `None` (เกมยังไม่จบ)
+- **ค่าคงที่ (Configuration)**:
+  - `WINNING_COMBOS`: เส้นคอมโบชนะทั้งหมด 8 เส้น (3 แนวนอน / 3 แนวตั้ง / 2 แนวทแยง) ฮาร์ดโค้ดสำหรับตาราง 3x3
 
-- **คลาส `GameNode` (โครงสร้างข้อมูลแต่ละโหนดใน Game Tree)**:
-  - `__init__(self, board, player_turn, move, depth)`: กำหนดค่าเริ่มต้นของโหนด ได้แก่ ตารางปัจจุบัน, ตาเดินของผู้เล่น, ช่องที่เดินเข้ามา, ระดับความลึก (depth), ลิสต์กิ่งลูก (`children`), ตรวจสอบสถานะจบเกม (`is_terminal`), เก็บสถิติกิ่งปลายทาง (`wins_x`, `wins_o`, `draws`), และค่า Minimax (`minimax_val`)
+- **ฟังก์ชันช่วยระดับโมดูล**:
+  - `get_opponent(player)`: คืนคู่แข่ง (`'X'` → `'O'`, `'O'` → `'X'`) — ใช้สลับตาเดินระหว่างโหนดแม่กับลูกใน BFS Expansion
+  - `swap_symbols(board)`: สลับ `X↔O` ทั้งกระดานด้วย `str.maketrans` — ใช้ใน `evaluate_branches` เมื่อไม่พบสถานะตรงใน `state_map` ให้ค้นหาแบบสลับข้างแทน
+  - `place_symbol(board, position, player)`: วางหมากแบบ Immutable แล้วคืนสตริงกระดานใหม่ — ทุกโหนดลูกของ BFS แทนผลลัพธ์หนึ่งการวาง
+  - `check_board_winner(board)`: ตรวจผู้ชนะ/เสมอจาก `WINNING_COMBOS` คืน `'X'` / `'O'` / `'Draw'` / `None` — ใช้ตัดสินว่า BFS ควรหยุดตัดกิ่ง (Leaf) หรือขยายต่อ
 
-- **คลาส `OXBFSTree` (การสร้างและประเมินผลกิ่ง BFS)**:
-  - `__init__(self)`: กำหนดค่าเริ่มต้นตัวแปร และสั่งสร้าง Game Tree ทันทีเมื่อออบเจกต์ถูกสร้างขึ้น
-  - `_build_tree(self)`: สร้าง BFS Game Tree ทั้งหมด 549,946 โหนด (สำหรับ 3x3) โดยใช้ Queue (`collections.deque`) เริ่มต้นจากตารางว่างเปล่า `' ' * TOTAL_CELLS` แตกกิ่งทีละระดับ (FIFO) มีการป้องกัน State Explosion เมื่อขนาดตารางใหญ่กว่า 3x3 ด้วยการจำกัดความลึก และใช้ลูปย้อนกลับ (`reversed`) เพื่อรวมผลสถิติจำนวนกิ่งชนะ/แพ้/เสมอ พร้อมคำนวณค่า Minimax ส่งต่อขึ้นมาสู่ Root
-  - `get_node(self, board, player_turn)`: ค้นหาและดึงโหนดจาก `state_map` ตามสถานะตารางและตาเดิน
-  - `evaluate_branches(self, current_board, current_player)`: ประเมินกิ่งทางเลือกทั้งหมดจากสถานะปัจจุบัน คำนวณคะแนนกิ่ง (Branch Score) อัตราการชนะ และเลือกตาเดินที่ดีที่สุด (`best_move`) โดยใช้กลยุทธ์:
-    1. เดินแล้วชนะทันที -> เลือกเดินทันที
-    2. คู่แข่งกำลังจะชนะ -> เดินบล็อกทันที
-    3. เลือกกิ่งที่มีค่า Minimax สูงที่สุด
-    4. หากมีหลายกิ่ง ให้เลือกกิ่งที่มีคะแนนรวมสูงสุด
-  - `get_debug_text(self, current_board, current_player, turn_number, chosen_move)`: เรียกใช้งานฟังก์ชันจากโมดูล `ox_debug` เพื่อสร้างข้อความสรุปผลการวิเคราะห์กิ่ง
+- **คลาส `GameNode` (โหนดใน BFS Tree)**:
+  - `__init__(board, player_turn, move, depth)`: เก็บข้อมูลโหนด — `board` ปัจจุบัน, `player_turn` (ผู้เล่นที่ได้เดิน), `move` ที่เข้ามา, `depth` ระดับความลึกใน BFS, ลูก `children`, และ `is_terminal` (true เมื่อเกมจบ)
+  - สถิติที่จะถูกเติมหลัง BFS: `wins_x`, `wins_o`, `draws`, `minimax_val` — ค่าทั้งหมดถูกสะสมแบบ Bottom-Up โดย `_build_tree`
 
----
-
-### 2. ไฟล์ `ox_debug.py` (ระบบจัดรูปแบบข้อความ DEBUG)
-
-โมดูลช่วยจัดรูปแบบข้อความรายงานผลการวิเคราะห์กิ่งให้อ่านง่ายและเป็นระเบียบ:
-
-- `format_row(board, start_index, size)`: จัดรูปแบบการแสดงผลช่องในแถวตามขนาด `size` ที่กำหนด เช่น `. | X | .`
-- `get_branch_score(branch)`: ดึงค่าคะแนนของกิ่ง (`branch['score']`) เพื่อใช้เป็นคีย์สำหรับจัดเรียงลำดับกิ่งที่ดีที่สุด
-- `get_debug_text(tree, current_board, current_player, turn_number, chosen_move)`: สร้างข้อความรายงานผล DEBUG ละเอียดประจำเทิร์น ประกอบด้วย:
-  - สถานะกระดานปัจจุบันตามขนาด `BOARD_SIZE`
-  - รายการกิ่งทางเลือกทั้งหมด เรียงลำดับจากคะแนนสูงสุด พร้อมสัญลักษณ์ `[BEST MOVE]`
-  - ผลวิเคราะห์ Minimax (การันตีชนะ, เสมอ, หรืออาจพ่ายแพ้)
-  - รูปภาพ Preview ตารางตามขนาดของแต่ละกิ่ง
-  - สรุปตาเดินที่ AI ตัดสินใจเลือก
+- **คลาส `OXBFSTree` (ตัวสร้าง + ค้นหา BFS Tree)**:
+  - `__init__()`: ตั้งต้นและเรียก `_build_tree()` ทันที — ต้นไม้ถูกสร้างครั้งเดียวตอนเริ่มโปรแกรม (~1 วินาที)
+  - `_build_tree()`: **หัวใจของ BFS**
+    1. สร้าง Root `' ' * 9` → ใส่ `deque` พร้อม `all_nodes` และลง `state_map`
+    2. วน `popleft()` (FIFO) ทีละโหนด → แตกไปยังช่องว่างทุกช่อง → สร้างลูก depth+1 → `append` เข้าท้ายคิว + ลง `state_map` จนครบ 549,946 โหนด
+    3. `for node in reversed(all_nodes)`: ลูกถูกประมวลผลก่อนแม่เสมอ → สะสม `wins_x / wins_o / draws` จากใบไม้ขึ้นสู่ Root → คำนวณ `minimax_val` = `max()` ที่ตา X / `min()` ที่ตา O
+  - `get_node(board, player_turn)`: ค้นหาโหนดจาก `state_map` → **O(1) lookup**
+  - `evaluate_branches(current_board, current_player)`: ประเมินกิ่งทางเลือกทั้งหมดจากสถานะปัจจุบัน
+    1. ค้นหาโหนดใน `state_map`; ถ้าไม่พบ สลับ `X↔O` ด้วย `swap_symbols` แล้วค้นหาอีกครั้ง (`is_swapped = True`)
+    2. วนลูกทุกตัวดึงสถิติ BFS ที่คำนวณไว้แล้ว แปลงมุมมองให้เป็นของผู้เล่นปัจจุบัน (กรณี O: กลับเครื่องหมาย `minimax_val` สลับ `wins_x↔wins_o`)
+    3. คำนวณ `score = wins − losses`, `win_rate` ประกอบเป็น dict กิ่ง
+    4. เลือกตาเดิน: ชนะทันที → บล็อกคู่แข่ง → `minimax_val` สูงสุด → คะแนนสูงสุด
+  - `get_debug_text(...)`: ส่งต่อให้ `ox_debug` เรนเดอร์ผลวิเคราะห์จาก BFS Tree
 
 ---
 
-### 3. ไฟล์ `gui.py` (ส่วนติดต่อผู้ใช้กราฟิก Tkinter)
+### 2. ไฟล์ `ox_debug.py` (แสดงผลข้อมูลจาก BFS)
 
-โมดูลควบคุมหน้าต่างโปรแกรม การโต้ตอบกับผู้เล่น และการเรนเดอร์ภาพ:
+- `format_row(board, start_index, size)`: แปลงแถวกระดานเป็นข้อความ เช่น `. | X | .`
+- `get_branch_score(branch)`: คืน `branch['score']` ใช้เป็นคีย์จัดเรียงกิ่ง
+- `get_debug_text(tree, current_board, current_player, turn_number, chosen_move=None)`:
+  - เรียก `tree.evaluate_branches(...)` ดึงกิ่งทั้งหมดจาก BFS Tree
+  - เรียงกิ่งตามคะแนน ใส่เครื่องหมาย `★ [BEST MOVE]` / `[DIRECT ...]` แต่ละกิ่ง
+  - แสดงผลค่า `minimax_val` + Preview ตารางลูกทุกอัน + สรุปตาเดินที่ BFS เลือก
 
-- `place_symbol(board, position, player)`: ฟังก์ชันช่วยวางสัญลักษณ์ลงในสตริงกระดาน
+---
+
+### 3. ไฟล์ `gui.py` (อินเทอร์เฟซที่เรียกใช้ BFS)
+
+- `place_symbol(...)`: วางหมากในสตริงกระดาน (เหมือน engine ใช้ใน GUI)
 - **คลาส `OXGameGUI`**:
-  - `__init__(self, root)`: กำหนดค่าหน้าต่างหลัก Tkinter (1180x740), ค่าสี, ตัวแปรสถานะเกม, และเรียกโหลดระบบ
-  - `_init_engine(self)`: สั่งโหลดและสร้างออบเจกต์ `OXBFSTree`
-  - `_create_widgets(self)`: สร้างและจัดวางวิดเจ็ตทั้งหมด แบ่งสัดส่วน 40:60 ด้วย Grid Uniform:
-    - ส่วนบน: Header แถบหัวข้อ พร้อมปุ่มกดเริ่มเกมใหม่ (Restart)
-    - ฝั่งซ้าย (~40%): ข้อมูลผู้เล่น, สกอร์บอร์ดคะแนน, ป้ายแจ้งสถานะเทิร์น, และกระดานปุ่มตามขนาด `BOARD_SIZE` (ล็อคขนาดด้วย `uniform="cell"`)
-    - ฝั่งขวา (~60%): หน้าต่าง Live DEBUG Console พร้อม Scrollbar และปุ่ม Copy/Clear Log
-  - `_append_debug_log(self, text)`: แสดงข้อความลงในช่อง Text Box ของหน้าต่าง Debug และพิมพ์ออกทาง Terminal Console
-  - `_clear_debug_log(self)`: ล้างข้อความทั้งหมดในหน้าต่าง Debug
-  - `_copy_debug_log(self)`: คัดลอกข้อความในหน้าต่าง Debug ไปยัง Clipboard ของระบบ
-  - `start_new_game(self)`: รีเซ็ตกระดานเป็นช่องว่าง ล้างข้อความ Debug คืนค่าปุ่มทั้งหมด `TOTAL_CELLS` ช่อง และเริ่มรอบใหม่
-  - `_update_status(self, text, is_over)`: อัปเดตข้อความและสีพื้นหลังของแถบสถานะ (เช่น ตาเดินของคุณ, บอทกำลังคิด, หรือแจ้งผู้ชนะ)
-  - `_update_scoreboard(self)`: อัปเดตตัวเลขคะแนนบนสกอร์บอร์ด (ผู้เล่น X, บอท O, เสมอ)
-  - `_highlight_winning_line(self, combo)`: ไฮไลต์เปลี่ยนสีพื้นหลังของช่องที่ชนะเรียงเป็นเส้นคอมโบ
-  - `_check_game_end(self)`: ตรวจสอบการจบเกม (ชนะหรือเสมอ) บันทึกคะแนน และแสดงผลลัพธ์
-  - `_on_cell_clicked(self, idx)`: จัดการเหตุการณ์เมื่อผู้เล่นคลิกช่องบนกระดาน ตรวจสอบความถูกต้องและส่งต่อคำสั่ง
-  - `_execute_move(self, move_idx)`: ดำเนินการวางหมาก บันทึกข้อความ DEBUG (เฉพาะในตาของบอท AI) อัปเดตปุ่ม และสลับเทิร์น
-  - `_ai_turn(self)`: ตาเดินของบอท AI เรียกให้อัลกอริทึม BFS วิเคราะห์กิ่งที่ดีที่สุดและเดินหมากอัตโนมัติ
+  - `__init__(root)`: ตั้งค่าหน้าต่าง Tkinter 1180x740, สี, ตัวแปรเกม, เรียก `_init_engine()`
+  - `_init_engine()`: สร้าง `OXBFSTree()` — **จุดเริ่มต้นของ BFS Precompute**
+  - `_create_widgets()`: จัด layout 40:60, กระดานปุ่ม 3x3 (ล็อคขนาด `uniform="cell"`), Debug Console ฝั่งขวา
+  - `_on_cell_clicked(idx)`: รับคลิกจากผู้เล่น ส่งต่อไป `_execute_move`
+  - `_execute_move(move_idx)`: วางหมาก, เรียก `tree.get_debug_text(...)` เมื่อถึงตาบอท, อัปเดต UI, สลับเทิร์น
+  - `_ai_turn()`: เรียก `tree.evaluate_branches(board, 'O')` → ได้ `best_move` จาก BFS Tree → เดินหมากอัตโนมัติ
+  - `start_new_game()`: รีเซ็ตกระดาน `' ' * 9`, ล้าง Debug, คืนค่าปุ่ม 9 ช่อง
+  - `_update_status(text, is_over)`: อัปเดตข้อความ/สีแถบสถานะ
+  - `_update_scoreboard()`: อัปเดตคะแนน X/O/Draw
+  - `_highlight_winning_line(combo)`: เปลี่ยนสีพื้นหลังเส้นที่ชนะ
+  - `_check_game_end()`: ตรวจจบเกม บันทึกคะแนน แสดงผลลัพธ์
+  - `_append_debug_log(text)` / `_clear_debug_log()`: แสดง/ล้างข้อความ Debug
 
 ---
 
-### 4. ไฟล์ `main.py` (จุดเริ่มต้นการรันโปรแกรม)
+### 4. ไฟล์ `main.py` (จุดเริ่มต้น)
 
-- `main()`: ฟังก์ชันหลักสำหรับสร้างหน้าต่าง `tk.Tk()`, ผูกเข้ากับคลาส `OXGameGUI`, และเริ่ม Event Loop ด้วย `root.mainloop()` เพื่อเปิดหน้าต่างเกมขึ้นมาทันที
+- `main()`: สร้าง `tk.Tk()` → ผูกกับ `OXGameGUI` → เริ่ม `root.mainloop()`

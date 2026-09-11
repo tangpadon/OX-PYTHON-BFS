@@ -1,20 +1,12 @@
 import tkinter as tk
-from tkinter import ttk, messagebox
-from ox_bfs_engine import OXBFSTree, WINNING_COMBOS, BOARD_SIZE, TOTAL_CELLS
+from tkinter import ttk
+from core_bfs import OXBFSTree, place_symbol, check_board_winner, WINNING_COMBOS
 
-def place_symbol(board, position, player):
-    board_list = list(board)
-    board_list[position] = player
-    return "".join(board_list)
-
-# ==========================================
 # GUI Application
-# ==========================================
-
 class OXGameGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("OX Game (Tic-Tac-Toe) - ผู้เล่น (X) vs บอท BFS (O)")
+        self.root.title("OX Game")
         self.root.geometry("1180x740")
         self.root.minsize(980, 620)
         self.root.configure(bg="#F0F2F5")
@@ -27,7 +19,7 @@ class OXGameGUI:
         self.COLOR_BTN = "#FFFFFF"
         self.COLOR_BTN_HOVER = "#E3F2FD"
 
-        self.board = ' ' * TOTAL_CELLS
+        self.board = ' ' * 9
         self.current_player = 'X'
         self.turn_count = 1
         self.game_over = False
@@ -43,10 +35,7 @@ class OXGameGUI:
     def _init_engine(self):
         self.tree = OXBFSTree()
 
-    # ==========================================
     # Layout Components
-    # ==========================================
-
     def _create_widgets(self):
         header = tk.Frame(self.root, bg="#1E293B", height=65)
         header.pack(fill=tk.X, side=tk.TOP)
@@ -54,7 +43,7 @@ class OXGameGUI:
 
         title_lbl = tk.Label(
             header,
-            text="🎮 เกม OX (Tic-Tac-Toe)",
+            text="เกม OX",
             font=("Segoe UI", 15, "bold"),
             fg="#F8FAFC",
             bg="#1E293B"
@@ -122,19 +111,16 @@ class OXGameGUI:
         board_frame = tk.Frame(left_panel, bg="#CBD5E1", bd=2, relief=tk.SUNKEN)
         board_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
 
-        for r in range(BOARD_SIZE):
+        for r in range(3):
             board_frame.rowconfigure(r, weight=1, uniform="cell")
             board_frame.columnconfigure(r, weight=1, uniform="cell")
 
-        if BOARD_SIZE <= 3:
-            btn_font_size = 32
-        else:
-            btn_font_size = 20
+        btn_font_size = 32
 
         self.buttons = []
-        for i in range(TOTAL_CELLS):
-            row = i // BOARD_SIZE
-            col = i % BOARD_SIZE
+        for i in range(9):
+            row = i // 3
+            col = i % 3
             btn = tk.Button(
                 board_frame,
                 text=" ",
@@ -158,42 +144,12 @@ class OXGameGUI:
 
         debug_title = tk.Label(
             debug_header,
-            text="📊 DEBUG Console: การแตกกิ่งที่เป็นไปได้ทั้งหมด (All BFS Branches Analysis)",
+            text="DEBUG Console: กิ่งที่เป็นไปได้ทั้งหมด",
             font=("Consolas", 10, "bold"),
             fg="#38BDF8",
             bg="#0F172A"
         )
         debug_title.pack(side=tk.LEFT, padx=12, pady=8)
-
-        btn_copy = tk.Button(
-            debug_header,
-            text="📋 Copy Log",
-            font=("Segoe UI", 8),
-            bg="#334155",
-            fg="#F8FAFC",
-            activebackground="#475569",
-            activeforeground="#FFFFFF",
-            relief=tk.FLAT,
-            padx=8,
-            cursor="hand2",
-            command=self._copy_debug_log
-        )
-        btn_copy.pack(side=tk.RIGHT, padx=5, pady=5)
-
-        btn_clear = tk.Button(
-            debug_header,
-            text="🧹 Clear Log",
-            font=("Segoe UI", 8),
-            bg="#334155",
-            fg="#F8FAFC",
-            activebackground="#475569",
-            activeforeground="#FFFFFF",
-            relief=tk.FLAT,
-            padx=8,
-            cursor="hand2",
-            command=self._clear_debug_log, 
-        )
-        btn_clear.pack(side=tk.RIGHT, padx=5, pady=5)
 
         self.debug_text = tk.Text(
             right_panel,
@@ -218,12 +174,7 @@ class OXGameGUI:
         self.debug_text.tag_config("turn_header", foreground="#38BDF8", font=("Consolas", 9, "bold"))
         self.debug_text.tag_config("best_move", foreground="#4ADE80", font=("Consolas", 9, "bold"))
 
-
-
-    # ==========================================
     # Game Events & Move Execution
-    # ==========================================
-
     def _append_debug_log(self, text):
         print(text)
         self.debug_text.insert(tk.END, text)
@@ -232,19 +183,13 @@ class OXGameGUI:
     def _clear_debug_log(self):
         self.debug_text.delete("1.0", tk.END)
 
-    def _copy_debug_log(self):
-        content = self.debug_text.get("1.0", tk.END)
-        self.root.clipboard_clear()
-        self.root.clipboard_append(content)
-        messagebox.showinfo("คัดลอกสำเร็จ", "คัดลอกเนื้อหา DEBUG Log ไปยังคลิปบอร์ดแล้ว!")
-
     def start_new_game(self):
         if self.ai_job is not None:
             self.root.after_cancel(self.ai_job)
             self.ai_job = None
 
         self._clear_debug_log()
-        self.board = ' ' * TOTAL_CELLS
+        self.board = ' ' * 9
         self.current_player = 'X'
         self.turn_count = 1
         self.game_over = False
@@ -272,39 +217,32 @@ class OXGameGUI:
             self.buttons[idx].config(bg=self.COLOR_WIN)
 
     def _check_game_end(self):
-        for combo in WINNING_COMBOS:
-            first = combo[0]
-            if self.board[first] != ' ':
-                all_match = True
-                for pos in combo:
-                    if self.board[pos] != self.board[first]:
-                        all_match = False
-                        break
-                if all_match:
-                    winner = self.board[first]
-                    self.game_over = True
-                    self.scores[winner] = self.scores[winner] + 1
-                    self._update_scoreboard()
-                    self._highlight_winning_line(combo)
+        winner = check_board_winner(self.board)
+        if winner is None:
+            return False
 
-                    if winner == 'X':
-                        who = "👤 คุณ (X)"
-                    else:
-                        who = "🤖 บอท BFS (O)"
+        self.game_over = True
+        self.scores[winner] = self.scores[winner] + 1
+        self._update_scoreboard()
 
-                    self._update_status(f"🎉 {who} เป็นฝ่ายชนะ!", is_over=True)
-                    self._append_debug_log(f"\n[ผลการแข่งขัน] {who} ชนะเกมในเทิร์นที่ {self.turn_count}!\n\n")
-                    return True
-
-        if ' ' not in self.board:
-            self.game_over = True
-            self.scores['Draw'] = self.scores['Draw'] + 1
-            self._update_scoreboard()
+        if winner == 'Draw':
             self._update_status("🤝 ผลการแข่งขัน: เสมอกัน (Draw)!", is_over=True)
             self._append_debug_log(f"\n[ผลการแข่งขัน] เสมอกัน (Draw) ในเทิร์นที่ {self.turn_count}!\n\n")
             return True
 
-        return False
+        if winner == 'X':
+            who = "👤 คุณ (X)"
+        else:
+            who = "🤖 บอท BFS (O)"
+
+        for combo in WINNING_COMBOS:
+            if all(self.board[pos] == winner for pos in combo):
+                self._highlight_winning_line(combo)
+                break
+
+        self._update_status(f"🎉 {who} เป็นฝ่ายชนะ!", is_over=True)
+        self._append_debug_log(f"\n[ผลการแข่งขัน] {who} ชนะเกมในเทิร์นที่ {self.turn_count}!\n\n")
+        return True
 
     def _on_cell_clicked(self, idx):
         if self.game_over:
