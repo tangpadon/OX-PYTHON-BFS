@@ -31,7 +31,7 @@ def get_debug_text(tree, current_board, current_player, turn_number, chosen_move
         lines.append(f"       {row_str}")
 
     lines.append(dash_line)
-    lines.append(f" กิ่งทางเลือกที่เป็นไปได้ทั้งหมดจากสถานะนี้ ({len(branches)} กิ่ง):")
+    lines.append(f" กิ่งสถานะที่เป็นไปได้ (Child Nodes: {len(branches)} กิ่ง):")
     lines.append(dash_line)
 
     sorted_branches = sorted(branches, key=get_branch_score, reverse=True)
@@ -53,15 +53,7 @@ def get_debug_text(tree, current_board, current_player, turn_number, chosen_move
             direct_str = ""
 
         lines.append(f" กิ่งที่ #{idx}: ช่อง ({b['row']}, {b['col']}) [Index {b['move']}]{star}{direct_str}")
-
-        if b['minimax_val'] == 1:
-            eval_desc = "การันตีชนะ (Force Win)"
-        elif b['minimax_val'] == -1:
-            eval_desc = "อาจพ่ายแพ้ (Losing branch)"
-        else:
-            eval_desc = "เสมอ (Draw)"
-
-        lines.append(f"    └─ ผลวิเคราะห์เกม (Minimax): {eval_desc} (ค่า: {b['minimax_val']:+d})")
+        lines.append(f"    └─ Minimax Value: {b['minimax_val']:+d} | ชนะ: {b['wins']}, แพ้: {b['losses']}, เสมอ: {b['draws']}")
 
         for r in range(size):
             row_str = format_row(b['next_board'], r * size, size)
@@ -78,7 +70,7 @@ def get_debug_text(tree, current_board, current_player, turn_number, chosen_move
 
     r_sel = pick_move // size
     c_sel = pick_move % size
-    lines.append(f" [สรุปการตัดสินใจ] AI เลือกเดินกิ่งช่อง ({r_sel}, {c_sel}) Index {pick_move}")
+    lines.append(f" AI เลือกเดิน: ช่อง ({r_sel}, {c_sel}) [Index {pick_move}]")
     lines.append(border_line)
     return "\n".join(lines)
 

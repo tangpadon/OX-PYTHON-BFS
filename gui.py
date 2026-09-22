@@ -71,8 +71,8 @@ class OXGameGUI:
 
         main_container = tk.Frame(self.root, bg=self.COLOR_BG)
         main_container.pack(fill=tk.BOTH, expand=True, padx=15, pady=15)
-        main_container.columnconfigure(0, weight=4, uniform="col")
-        main_container.columnconfigure(1, weight=6, uniform="col")
+        main_container.columnconfigure(0, weight=48, uniform="col")
+        main_container.columnconfigure(1, weight=52, uniform="col")
         main_container.rowconfigure(0, weight=1)
 
         # Left Panel: Board & Status
