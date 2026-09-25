@@ -48,6 +48,7 @@ class GameNode:
         self.wins_o = 0
         self.draws = 0
         self.minimax_val = None
+        self.steps_to_end = 0
 
 
 # BFS Engine
@@ -84,6 +85,7 @@ class OXBFSTree:
         for node in reversed(all_nodes):
             if node.is_terminal:
                 self.total_leaves += 1
+                node.steps_to_end = 0
                 if node.winner == 'X':
                     node.minimax_val = 1
                     node.wins_x = 1
@@ -101,9 +103,25 @@ class OXBFSTree:
 
                 vals = [c.minimax_val for c in node.children]
                 if node.player_turn == 'X':
-                    node.minimax_val = max(vals)
+                    best_val = max(vals)
+                    node.minimax_val = best_val
+                    best_children = [c for c in node.children if c.minimax_val == best_val]
+                    if best_val == 1:
+                        node.steps_to_end = min(c.steps_to_end for c in best_children) + 1
+                    elif best_val == -1:
+                        node.steps_to_end = max(c.steps_to_end for c in best_children) + 1
+                    else:
+                        node.steps_to_end = min(c.steps_to_end for c in best_children) + 1
                 else:
-                    node.minimax_val = min(vals)
+                    best_val = min(vals)
+                    node.minimax_val = best_val
+                    best_children = [c for c in node.children if c.minimax_val == best_val]
+                    if best_val == -1:
+                        node.steps_to_end = min(c.steps_to_end for c in best_children) + 1
+                    elif best_val == 1:
+                        node.steps_to_end = max(c.steps_to_end for c in best_children) + 1
+                    else:
+                        node.steps_to_end = min(c.steps_to_end for c in best_children) + 1
 
     def evaluate_branches(self, current_board, current_player):
         node = self.state_map.get((current_board, current_player))
@@ -117,7 +135,6 @@ class OXBFSTree:
         if not node or not node.children:
             return [], None
 
-        opponent = OXBoard.get_opponent(current_player)
         branches = []
         for c in node.children:
             if is_swapped or current_player == 'X':
@@ -149,25 +166,24 @@ class OXBFSTree:
                 'draws': c.draws,
                 'score': wins - losses,
                 'minimax_val': val,
+                'steps': c.steps_to_end + 1,
                 'direct_result': direct
             })
 
-        for b in branches:
-            if b['direct_result'] == current_player:
-                return branches, b['move']
-
-        for b in branches:
-            simulated_board = OXBoard.place_symbol(current_board, b['move'], opponent)
-            if OXBoard.check_winner(simulated_board) == opponent:
-                return branches, b['move']
-
         best_m = max(b['minimax_val'] for b in branches)
         best_candidates = [b for b in branches if b['minimax_val'] == best_m]
-        best_move = max(best_candidates, key=lambda x: x['score'])['move']
+        if best_m == 1:
+            min_steps = min(b['steps'] for b in best_candidates)
+            best_move = next(b['move'] for b in best_candidates if b['steps'] == min_steps)
+        elif best_m == -1:
+            max_steps = max(b['steps'] for b in best_candidates)
+            best_move = next(b['move'] for b in best_candidates if b['steps'] == max_steps)
+        else:
+            best_move = best_candidates[0]['move']
         return branches, best_move
 
 
-# Debug Formatter
+# Debug
 class OXDebugger:
     @staticmethod
     def format_row(board, start_index):
@@ -195,7 +211,11 @@ class OXDebugger:
         else:
             pick = auto_best
 
-        sorted_branches = sorted(branches, key=lambda x: x['score'], reverse=True)
+        def branch_sort_key(b):
+            step_priority = -b['steps'] if b['minimax_val'] == 1 else (b['steps'] if b['minimax_val'] == -1 else 0)
+            return (b['minimax_val'], step_priority)
+
+        sorted_branches = sorted(branches, key=branch_sort_key, reverse=True)
         for idx, b in enumerate(sorted_branches, start=1):
             if b['move'] == pick:
                 star = " ★ [BEST MOVE]"
@@ -207,8 +227,15 @@ class OXDebugger:
             else:
                 direct = ""
 
+            if b['minimax_val'] == 1:
+                val_str = f"+1 (ชนะใน {b['steps']} ตา)"
+            elif b['minimax_val'] == -1:
+                val_str = "-1"
+            else:
+                val_str = "0"
+
             lines.append(f" กิ่งที่ #{idx}: ช่อง ({b['row']}, {b['col']}) [Index {b['move']}]{star}{direct}")
-            lines.append(f"    └─ Minimax Value: {b['minimax_val']:+d} | ชนะ: {b['wins']}, แพ้: {b['losses']}, เสมอ: {b['draws']}")
+            lines.append(f"    └─ Minimax Value: {val_str}")
             lines.append(f"       Preview: [{self.format_row(b['next_board'], 0)}]")
             lines.append(f"                [{self.format_row(b['next_board'], 3)}]")
             lines.append(f"                [{self.format_row(b['next_board'], 6)}]\n")

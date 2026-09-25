@@ -4,3 +4,5 @@ __pycache__
 
 # Pytest / tooling cache
 .pytest_cache/
+tempCodeRunnerFile.py
+.vs/
