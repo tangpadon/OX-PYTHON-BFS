@@ -7,7 +7,7 @@ class OXGameGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("OX Game")
-        self.root.geometry("1180x740")
+        self.root.geometry("1180x720")
         self.root.minsize(980, 620)
         self.root.configure(bg="#F0F2F5")
 
@@ -37,38 +37,6 @@ class OXGameGUI:
 
     # Layout Components
     def _create_widgets(self):
-        header = tk.Frame(self.root, bg="#1E293B", height=65)
-        header.pack(fill=tk.X, side=tk.TOP)
-        header.pack_propagate(False)
-
-        title_lbl = tk.Label(
-            header,
-            text="เกม OX",
-            font=("Segoe UI", 15, "bold"),
-            fg="#F8FAFC",
-            bg="#1E293B"
-        )
-        title_lbl.pack(side=tk.LEFT, padx=20, pady=10)
-
-        header_right = tk.Frame(header, bg="#1E293B")
-        header_right.pack(side=tk.RIGHT, padx=20, pady=10)
-
-        self.btn_restart = tk.Button(
-            header_right,
-            text="🔄 Restart ตาราง",
-            font=("Segoe UI", 9, "bold"),
-            bg="#2563EB",
-            fg="#FFFFFF",
-            activebackground="#1D4ED8",
-            activeforeground="#FFFFFF",
-            relief=tk.FLAT,
-            padx=12,
-            pady=4,
-            cursor="hand2",
-            command=self.start_new_game
-        )
-        self.btn_restart.pack(side=tk.RIGHT)
-
         main_container = tk.Frame(self.root, bg=self.COLOR_BG)
         main_container.pack(fill=tk.BOTH, expand=True, padx=15, pady=15)
         main_container.columnconfigure(0, weight=48, uniform="col")
@@ -78,6 +46,21 @@ class OXGameGUI:
         # Left Panel: Board & Status
         left_panel = tk.Frame(main_container, bg=self.COLOR_CARD, bd=1, relief=tk.SOLID)
         left_panel.grid(row=0, column=0, sticky="nsew", padx=(0, 10), ipadx=10, ipady=10)
+
+        self.btn_restart = tk.Button(
+            left_panel,
+            text="🔄 Restart ตาราง",
+            font=("Segoe UI", 9, "bold"),
+            bg="#2563EB",
+            fg="#FFFFFF",
+            activebackground="#1D4ED8",
+            activeforeground="#FFFFFF",
+            relief=tk.FLAT,
+            pady=6,
+            cursor="hand2",
+            command=self.start_new_game
+        )
+        self.btn_restart.pack(fill=tk.X, padx=15, pady=(5, 5))
 
         info_frame = tk.LabelFrame(left_panel, text=" 👥 ข้อมูลการแข่งขัน ", font=("Segoe UI", 10, "bold"), bg=self.COLOR_CARD, fg="#334155")
         info_frame.pack(fill=tk.X, padx=15, pady=(5, 10))
