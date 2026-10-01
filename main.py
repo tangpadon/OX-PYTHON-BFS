@@ -1,3 +1,5 @@
+import os
+import ctypes
 import tkinter as tk
 from tkinter import ttk
 from collections import deque
@@ -19,7 +21,8 @@ class OXBoard:
 
     @staticmethod
     def swap_symbols(board):
-        return board.translate(str.maketrans('XO', 'OX'))
+        mapping = {'X': 'O', 'O': 'X', ' ': ' '}
+        return "".join(mapping[char] for char in board)
 
     @staticmethod
     def place_symbol(board, position, player):
@@ -27,9 +30,9 @@ class OXBoard:
 
     @staticmethod
     def check_winner(board):
-        for combo in OXBoard.WINNING_COMBOS:
-            if board[combo[0]] != ' ' and board[combo[0]] == board[combo[1]] == board[combo[2]]:
-                return board[combo[0]]
+        for a, b, c in OXBoard.WINNING_COMBOS:
+            if board[a] != ' ' and board[a] == board[b] == board[c]:
+                return board[a]
         if ' ' not in board:
             return 'Draw'
         return None
@@ -55,7 +58,7 @@ class GameNode:
 class OXBFSTree:
     def __init__(self):
         self.root = None
-        self.state_map = {}
+        self.state_map = {} #node index
         self.total_nodes = 0
         self.total_leaves = 0
         self._build_tree()
@@ -96,32 +99,29 @@ class OXBFSTree:
                     node.minimax_val = 0
                     node.draws = 1
             else:
-                for c in node.children:
-                    node.wins_x += c.wins_x
-                    node.wins_o += c.wins_o
-                    node.draws += c.draws
+                for child in node.children:
+                    node.wins_x += child.wins_x
+                    node.wins_o += child.wins_o
+                    node.draws += child.draws
 
-                vals = [c.minimax_val for c in node.children]
+                vals = [child.minimax_val for child in node.children]
                 if node.player_turn == 'X':
                     best_val = max(vals)
-                    node.minimax_val = best_val
-                    best_children = [c for c in node.children if c.minimax_val == best_val]
-                    if best_val == 1:
-                        node.steps_to_end = min(c.steps_to_end for c in best_children) + 1
-                    elif best_val == -1:
-                        node.steps_to_end = max(c.steps_to_end for c in best_children) + 1
-                    else:
-                        node.steps_to_end = min(c.steps_to_end for c in best_children) + 1
+                    is_winning = (best_val == 1)
+                    is_losing = (best_val == -1)
                 else:
                     best_val = min(vals)
-                    node.minimax_val = best_val
-                    best_children = [c for c in node.children if c.minimax_val == best_val]
-                    if best_val == -1:
-                        node.steps_to_end = min(c.steps_to_end for c in best_children) + 1
-                    elif best_val == 1:
-                        node.steps_to_end = max(c.steps_to_end for c in best_children) + 1
-                    else:
-                        node.steps_to_end = min(c.steps_to_end for c in best_children) + 1
+                    is_winning = (best_val == -1)
+                    is_losing = (best_val == 1)
+
+                node.minimax_val = best_val
+                best_children = [child for child in node.children if child.minimax_val == best_val]
+                if is_winning:
+                    node.steps_to_end = min(child.steps_to_end for child in best_children) + 1
+                elif is_losing:
+                    node.steps_to_end = max(child.steps_to_end for child in best_children) + 1
+                else:
+                    node.steps_to_end = min(child.steps_to_end for child in best_children) + 1
 
     def evaluate_branches(self, current_board, current_player):
         node = self.state_map.get((current_board, current_player))
@@ -136,48 +136,48 @@ class OXBFSTree:
             return [], None
 
         branches = []
-        for c in node.children:
+        for child in node.children:
             if is_swapped or current_player == 'X':
-                wins = c.wins_x
-                losses = c.wins_o
-                val = c.minimax_val
+                wins = child.wins_x
+                losses = child.wins_o
+                val = child.minimax_val
             else:
-                wins = c.wins_o
-                losses = c.wins_x
-                val = -c.minimax_val
+                wins = child.wins_o
+                losses = child.wins_x
+                val = -child.minimax_val
 
-            if is_swapped:
-                if c.winner == 'X':
-                    direct = 'O'
-                elif c.winner == 'O':
-                    direct = 'X'
-                else:
-                    direct = c.winner
-            else:
-                direct = c.winner
+            direct = child.winner
+            if is_swapped and child.winner in ('X', 'O'):
+                direct = OXBoard.get_opponent(child.winner)
 
             branches.append({
-                'move': c.move,
-                'row': c.move // 3,
-                'col': c.move % 3,
-                'next_board': OXBoard.place_symbol(current_board, c.move, current_player),
+                'move': child.move,
+                'row': child.move // 3,
+                'col': child.move % 3,
+                'next_board': OXBoard.place_symbol(current_board, child.move, current_player),
                 'wins': wins,
                 'losses': losses,
-                'draws': c.draws,
+                'draws': child.draws,
                 'score': wins - losses,
                 'minimax_val': val,
-                'steps': c.steps_to_end + 1,
+                'steps': child.steps_to_end + 1,
                 'direct_result': direct
             })
 
-        best_m = max(b['minimax_val'] for b in branches)
-        best_candidates = [b for b in branches if b['minimax_val'] == best_m]
-        if best_m == 1:
-            min_steps = min(b['steps'] for b in best_candidates)
-            best_move = next(b['move'] for b in best_candidates if b['steps'] == min_steps)
-        elif best_m == -1:
-            max_steps = max(b['steps'] for b in best_candidates)
-            best_move = next(b['move'] for b in best_candidates if b['steps'] == max_steps)
+        best_minimax = max(branch['minimax_val'] for branch in branches)
+        best_candidates = [branch for branch in branches if branch['minimax_val'] == best_minimax]
+        if best_minimax == 1:
+            min_steps = min(branch['steps'] for branch in best_candidates)
+            for branch in best_candidates:
+                if branch['steps'] == min_steps:
+                    best_move = branch['move']
+                    break
+        elif best_minimax == -1:
+            max_steps = max(branch['steps'] for branch in best_candidates)
+            for branch in best_candidates:
+                if branch['steps'] == max_steps:
+                    best_move = branch['move']
+                    break
         else:
             best_move = best_candidates[0]['move']
         return branches, best_move
@@ -207,40 +207,45 @@ class OXDebugger:
         lines.append("-" * 70)
 
         if chosen_move is not None:
-            pick = chosen_move
+            selected_move = chosen_move
         else:
-            pick = auto_best
+            selected_move = auto_best
 
-        def branch_sort_key(b):
-            step_priority = -b['steps'] if b['minimax_val'] == 1 else (b['steps'] if b['minimax_val'] == -1 else 0)
-            return (b['minimax_val'], step_priority)
+        def branch_sort_key(branch):
+            if branch['minimax_val'] == 1:
+                step_priority = -branch['steps']
+            elif branch['minimax_val'] == -1:
+                step_priority = branch['steps']
+            else:
+                step_priority = 0
+            return (branch['minimax_val'], step_priority)
 
         sorted_branches = sorted(branches, key=branch_sort_key, reverse=True)
-        for idx, b in enumerate(sorted_branches, start=1):
-            if b['move'] == pick:
-                star = " ★ [BEST MOVE]"
+        for idx, branch in enumerate(sorted_branches, start=1):
+            if branch['move'] == selected_move:
+                selected_tag = " ★ [SELECTED]"
             else:
-                star = ""
+                selected_tag = ""
 
-            if b['direct_result']:
-                direct = f" [DIRECT {b['direct_result']}!]"
+            if branch['direct_result']:
+                direct_tag = f" [DIRECT {branch['direct_result']}!]"
             else:
-                direct = ""
+                direct_tag = ""
 
-            if b['minimax_val'] == 1:
-                val_str = f"+1 (ชนะใน {b['steps']} ตา)"
-            elif b['minimax_val'] == -1:
+            if branch['minimax_val'] == 1:
+                val_str = f"+1 (ชนะใน {branch['steps']} ตา)"
+            elif branch['minimax_val'] == -1:
                 val_str = "-1"
             else:
                 val_str = "0"
 
-            lines.append(f" กิ่งที่ #{idx}: ช่อง ({b['row']}, {b['col']}) [Index {b['move']}]{star}{direct}")
+            lines.append(f" กิ่งที่ #{idx}: ช่อง ({branch['row']}, {branch['col']}) [Index {branch['move']}]{selected_tag}{direct_tag}")
             lines.append(f"    └─ Minimax Value: {val_str}")
-            lines.append(f"       Preview: [{self.format_row(b['next_board'], 0)}]")
-            lines.append(f"                [{self.format_row(b['next_board'], 3)}]")
-            lines.append(f"                [{self.format_row(b['next_board'], 6)}]\n")
+            lines.append(f"       Preview: [{self.format_row(branch['next_board'], 0)}]")
+            lines.append(f"                [{self.format_row(branch['next_board'], 3)}]")
+            lines.append(f"                [{self.format_row(branch['next_board'], 6)}]\n")
 
-        lines.append(f" AI เลือกเดิน: ช่อง ({pick // 3}, {pick % 3}) [Index {pick}]")
+        lines.append(f" AI เลือกเดิน: ช่อง ({selected_move // 3}, {selected_move % 3}) [Index {selected_move}]")
         lines.append("=" * 70)
         return "\n".join(lines)
 
@@ -253,6 +258,21 @@ class OXGameGUI:
         self.root.geometry("1180x720")
         self.root.minsize(980, 620)
         self.root.configure(bg="#F0F2F5")
+
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        ico_path = os.path.join(base_dir, 'icon.ico')
+        png_path = os.path.join(base_dir, 'icon.png')
+        if os.path.exists(ico_path):
+            try:
+                self.root.iconbitmap(default=ico_path)
+            except Exception:
+                pass
+        if os.path.exists(png_path):
+            try:
+                self.icon_photo = tk.PhotoImage(file=png_path)
+                self.root.iconphoto(True, self.icon_photo)
+            except Exception:
+                pass
 
         self.board = ' ' * 9
         self.current_player = 'X'
@@ -303,7 +323,7 @@ class OXGameGUI:
 
         self.status_lbl = tk.Label(
             left,
-            text="เทิร์น: ตาเดินของคุณ (X)",
+            text="เทิร์น: ตาเดินของผู้เล่น (X)",
             font=("Segoe UI", 12, "bold"),
             bg="#E2E8F0",
             fg="#0F172A",
@@ -359,10 +379,8 @@ class OXGameGUI:
             relief=tk.FLAT
         )
         v_scroll = ttk.Scrollbar(right, orient=tk.VERTICAL, command=self.debug_text.yview)
-        h_scroll = ttk.Scrollbar(right, orient=tk.HORIZONTAL, command=self.debug_text.xview)
-        self.debug_text.configure(xscrollcommand=h_scroll.set, yscrollcommand=v_scroll.set)
+        self.debug_text.configure(yscrollcommand=v_scroll.set)
         v_scroll.pack(side=tk.RIGHT, fill=tk.Y)
-        h_scroll.pack(side=tk.BOTTOM, fill=tk.X)
         self.debug_text.pack(fill=tk.BOTH, expand=True)
 
     def _append_debug_log(self, text):
@@ -466,8 +484,14 @@ class OXGameGUI:
                 self._execute_move(best_move)
 
 
-# Main Entry Point
+# Main
 if __name__ == '__main__':
+    try:
+        myappid = 'oxbfs.tictactoe.game.v1'
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+    except Exception:
+        pass
+
     root = tk.Tk()
     app = OXGameGUI(root)
     root.mainloop()
