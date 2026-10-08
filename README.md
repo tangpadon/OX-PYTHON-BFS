@@ -35,14 +35,13 @@
 
 ## 1. ฟังก์ชันในคลาส `OXBoard` (กฎกติกาและกระดาน)
 
-คลาสนี้เป็นคลังฟังก์ชันคำนวณเกี่ยวกับกฎกติกาของเกม โดยทุกฟังก์ชันเป็น `@staticmethod` (สามารถเรียกใช้ผ่านชื่อคลาสได้ทันทีโดยไม่ต้องสร้างอ็อบเจกต์)
+คลาสนี้เป็นคลังฟังก์ชันคำนวณเกี่ยวกับกฎกติกาของเกม โดยสามารถเรียกใช้งานผ่านชื่อคลาสได้ทันที เช่น `OXBoard.check_winner(board)` โดยไม่จำเป็นต้องสร้างอ็อบเจกต์
 
 ---
 
 ### `get_opponent(player)`
 
 ```python
-@staticmethod
 def get_opponent(player):
     return 'O' if player == 'X' else 'X'
 ```
@@ -60,7 +59,6 @@ def get_opponent(player):
 ### `place_symbol(board, position, player)`
 
 ```python
-@staticmethod
 def place_symbol(board, position, player):
     return board[:position] + player + board[position + 1:]
 ```
@@ -83,7 +81,6 @@ def place_symbol(board, position, player):
 ### `check_winner(board)`
 
 ```python
-@staticmethod
 def check_winner(board):
     for a, b, c in OXBoard.WINNING_COMBOS:
         if board[a] != ' ' and board[a] == board[b] == board[c]:

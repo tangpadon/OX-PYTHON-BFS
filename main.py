@@ -11,15 +11,12 @@ class OXBoard:
         (0, 4, 8), (2, 4, 6)
     )
 
-    @staticmethod
     def get_opponent(player):
         return 'O' if player == 'X' else 'X'
 
-    @staticmethod
     def place_symbol(board, position, player):
         return board[:position] + player + board[position + 1:]
 
-    @staticmethod
     def check_winner(board):
         for a, b, c in OXBoard.WINNING_COMBOS:
             if board[a] != ' ' and board[a] == board[b] == board[c]:
